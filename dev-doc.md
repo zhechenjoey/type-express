@@ -60,3 +60,39 @@
 - `npm run dev`
 
 - 参考：https://blog.csdn.net/sunxiaoju/article/details/91491036
+
+### 2、引入 Routing-controllers 
+
+- 官网教程
+
+  https://github.com/typestack/routing-controllers/blob/master/lang/chinese/READEME.md	
+
+> Routing-controllers 主要是通过 **依赖注入** 的思路开发 controller
+
+- 核心思路
+
+  app.ts
+
+  ```typescript
+  import 'reflect-metadata';
+  import { useExpressServer } from "routing-controllers";
+  import { routeConfig } from './libs/route';
+  
+  const app: express.Application = express();
+  useExpressServer(app, routeConfig); // 把controller、middleware 通过 routeConfig 加入 app 中
+  ```
+
+  /libs/route.ts
+
+  > libs 一般存放应用所用到的一些库配置
+
+  ```typescript
+  import { RoutingControllersOptions } from 'routing-controllers';
+  
+  export const routeConfig: RoutingControllersOptions = {
+      controllers: [process.cwd() + '/app/controllers/*.ts'],
+  }
+  ```
+
+  `useExpressServer` 创建 app，能够把受影响的 controller、middleware 等加入 app 中
+
