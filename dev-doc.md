@@ -153,4 +153,10 @@
 
   参考： https://github.com/typestack/routing-controllers/blob/master/lang/chinese/READEME.md#%E5%85%A8%E5%B1%80%E4%B8%AD%E9%97%B4%E4%BB%B6
 
-​			
+		### 4、依赖注入 typedi
+
+> 为什么要依赖注入？
+>
+> 当一个类中需要实例化另一个类时，需要使用 new 语句创建，若被创建的类的 构造函数 发生改变，那么 new 语句的内容也要一起跟着改，当整个程序中存在大量 new 语句时，一个一个去修改是很麻烦的。
+
+typedi 官网文档：https://docs.typestack.community/typedi/v/develop/
