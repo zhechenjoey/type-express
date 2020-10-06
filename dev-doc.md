@@ -96,3 +96,61 @@
 
   `useExpressServer` 创建 app，能够把受影响的 controller、middleware 等加入 app 中
 
+### 3、全局中间件
+
+​	在 routeConfig 中加入中间件位置
+
+​       /libs/route.ts
+
+- ```typescript
+  export const routeConfig: RoutingControllersOptions = {
+      controllers: [process.cwd() + '/app/controllers/*.ts'],
+      middlewares: [process.cwd() + '/libs/middleware/*.ts'],
+      defaultErrorHandler: false, // **有自己的全局错误处理**
+  }
+  ```
+
+  > /libs/middleware/middleware.ts
+
+  ```typescript
+  /**
+   * 全局中间件处理
+   */
+  import { Middleware, ExpressMiddlewareInterface } from "routing-controllers";
+  
+  // 监听所有请求进入
+  @Middleware({type : 'before'})
+  export class HeaderMiddleware implements ExpressMiddlewareInterface {
+      use(request: any, response: any, next: () => any): void {
+          console.log("before middleware");
+          next();
+      }
+  }
+  
+  // 监听所有请求返回
+  @Middleware({type : 'after'})
+  export class ResponseMiddleware implements ExpressMiddlewareInterface {
+      use(request: any, response: any, next: () => any): void {
+          console.log("after middleware");
+          next();
+      }
+  }
+  
+  // 全局错误处理
+  import { Middleware, ExpressErrorMiddlewareInterface } from "routing-controllers";
+  
+  @Middleware({ type: "after" })
+  export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
+      error(error: any, request: any, response: any, next: () => any) {
+          response.status(500).json({
+              ret: -1,
+              msg: 'service error',
+          })
+      }
+  
+  }
+  ```
+
+  参考： https://github.com/typestack/routing-controllers/blob/master/lang/chinese/READEME.md#%E5%85%A8%E5%B1%80%E4%B8%AD%E9%97%B4%E4%BB%B6
+
+​			

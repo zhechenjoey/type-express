@@ -4,6 +4,8 @@ import { Controller, Req, Res, Get } from "routing-controllers";
 export class UserController {
     @Get('/user')
     test() {
-        return 'This is UserController, thx';
+        // @ts-ignore
+        console.log(asasas);
+        // return 'This is UserController, thx';
     }
 }
