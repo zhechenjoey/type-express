@@ -4,7 +4,8 @@ import { routeConfig } from '../libs/route-config';
 
 import express = require("express");
 const app: express.Application = express();
+// console.log(app);
 useExpressServer(app, routeConfig);
-app.listen(3000, function () {
-  console.log("server is on localhost:3000");
+app.listen(3001, function () {
+  console.log("server is on localhost:3001");
 });
