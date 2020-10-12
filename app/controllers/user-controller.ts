@@ -10,9 +10,8 @@ export class UserController extends BaseController {
     private UserService: UserService;
 
     @Get('/user')
-    async test() {
+    async test(@Req() req: any) {
         const data = await this.UserService.testRedis();
-        console.log(this.success(data));
-        if(data) return this.success(data);
+        if(data !== '') return this.success(data);
     }
 }

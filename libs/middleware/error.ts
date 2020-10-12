@@ -1,5 +1,5 @@
 /**
- * 全局错误处理
+ * 全局错误处理(代码执行过程中，报了错，如 throw error)
  */
 
 import { Middleware, ExpressErrorMiddlewareInterface } from "routing-controllers";
